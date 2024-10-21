@@ -54,9 +54,9 @@ Route::get('/shop', function () {
     return view('shop');
 })->name('shop');
 
-Route::get('/shop/details', function () {
+Route::get('/shop_details', function () {
     return view('shop_details');
-})->name('shop.details');
+})->name('shop_details');
 
 Route::get('/wishlist', function () {
     return view('wishlist');

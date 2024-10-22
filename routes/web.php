@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\Admin\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,3 +71,39 @@ Route::fallback(function () {
 
 // Load auth routes
 require __DIR__ . '/auth.php';
+
+
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('login.submit');
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+    Route::get('dashboard', [AdminAuthController::class, 'dashboard'])->name('dashboard')->middleware('auth:admin');
+
+    // Password reset routes
+    Route::get('password/reset', [AdminAuthController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('password/email', [AdminAuthController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('password/reset/{token}', [AdminAuthController::class, 'showResetForm'])->name('password.reset');
+    Route::post('password/reset', [AdminAuthController::class, 'reset'])->name('password.update');
+});
+
+
+// Password reset routes for admin
+Route::get('password/reset', [AdminAuthController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [AdminAuthController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [AdminAuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [AdminAuthController::class, 'reset'])->name('password.update');
+
+Route::prefix('admin/products')->name('admin.products.')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/create', [ProductController::class, 'create'])->name('create');
+    Route::post('/', [ProductController::class, 'store'])->name('store');
+    Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
+    Route::put('/{product}', [ProductController::class, 'update'])->name('update');
+    Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
+});
+
+Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
+Route::get('/shop/details/{product}', [ProductController::class, 'show'])->name('shop_details');
+Route::get('/shop/product/{product}', [ProductController::class, 'show'])->name('shop.product.show');

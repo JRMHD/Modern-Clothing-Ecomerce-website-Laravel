@@ -43,11 +43,42 @@ class ProductController extends Controller
         return view('admin.products.create', ['categories' => $this->categories]);
     }
 
+    /**
+     * Shop page with filtering logic by category and price.
+     */
     public function shop()
     {
         $products = Product::orderBy('created_at', 'desc')->paginate(12);
-        return view('shop', compact('products'));
+        return view('shop', [
+            'products' => $products,
+            'categories' => $this->categories,
+        ]);
     }
+
+    // AJAX-based filtering logic for category and price
+    public function filterProducts(Request $request)
+    {
+        $query = Product::query();
+
+        // Apply category filter if selected
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category', $request->category);
+        }
+
+        // Apply price filter if selected
+        if ($request->has('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        // Get the filtered products
+        $products = $query->orderBy('created_at', 'desc')->get();
+
+        // Return a JSON response with the rendered HTML of the products
+        return response()->json([
+            'products' => view('profile.partials.product_list', compact('products'))->render(),
+        ]);
+    }
+
     public function show(Product $product)
     {
         // Get 5 recent products excluding the current product
@@ -102,7 +133,7 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
 
-    // New method to generate SKU
+    // Method to generate SKU
     private function generateSku()
     {
         $latestProduct = Product::orderBy('id', 'desc')->first();

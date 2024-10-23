@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,3 +108,12 @@ Route::prefix('admin/products')->name('admin.products.')->group(function () {
 Route::get('/shop', [ProductController::class, 'shop'])->name('shop');
 Route::get('/shop/details/{product}', [ProductController::class, 'show'])->name('shop_details');
 Route::get('/shop/product/{product}', [ProductController::class, 'show'])->name('shop.product.show');
+Route::get('/filter-products', [ProductController::class, 'filterProducts'])->name('filter.products');
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+    Route::delete('cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
+});
+Route::patch('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');

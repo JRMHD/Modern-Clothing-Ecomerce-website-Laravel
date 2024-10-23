@@ -48,49 +48,126 @@
                                  <a href="javascript:void(0);"><i class="fa-solid fa-search"></i></a>
                              </div>
                              <div class="anUser">
-                                 <a href="javascript:void(0);"><i class="fa-solid fa-user"></i></a>
+                                 @auth
+                                     <!-- If user is authenticated, redirect to dashboard -->
+                                     <a href="{{ route('dashboard') }}">
+                                         <i class="fa-solid fa-user"></i>
+                                     </a>
+                                 @else
+                                     <!-- If user is not authenticated, show login/register modal -->
+                                     <a href="javascript:void(0);" id="userLoginBtn">
+                                         <i class="fa-solid fa-user"></i>
+                                     </a>
+                                 @endauth
                              </div>
-                             <div class="anCart">
-                                 <a href="javascript:void(0);"><i
-                                         class="fa-solid fa-shopping-cart"></i><span>3</span></a>
-                                 <div class="cartWidgetArea">
-                                     <div class="cartWidgetProduct">
-                                         <img src="images/cart/1.jpg" alt="Marine Design" />
-                                         <a href="shop_details">Ulina luxurious bag for men women</a>
-                                         <div class="cartProductPrice clearfix">
-                                             <span class="price"><span><span>$</span>19.00</span></span>
-                                         </div>
-                                         <a href="javascript:void(0);" class="cartRemoveProducts"><i
-                                                 class="fa-solid fa-xmark"></i></a>
-                                     </div>
-                                     <div class="cartWidgetProduct">
-                                         <img src="images/cart/2.jpg" alt="Draped Neck" />
-                                         <a href="shop_details">Nasio stainless steel watch</a>
-                                         <div class="cartProductPrice clearfix">
-                                             <span class="price"><span><span>$</span>41.00</span></span>
-                                         </div>
-                                         <a href="javascript:void(0);" class="cartRemoveProducts"><i
-                                                 class="fa-solid fa-xmark"></i></a>
-                                     </div>
-                                     <div class="cartWidgetProduct">
-                                         <img src="images/cart/3.jpg" alt="Long Pleated" />
-                                         <a href="shop_details">Winner men’s comfortable t-shirt</a>
-                                         <div class="cartProductPrice clearfix">
-                                             <span class="price"><span><span>$</span>52.00</span></span>
-                                         </div>
-                                         <a href="javascript:void(0);" class="cartRemoveProducts"><i
-                                                 class="fa-solid fa-xmark"></i></a>
-                                     </div>
-                                     <div class="totalPrice">
-                                         Subtotal:
-                                         <span class="price"><span><span>$</span>112.00</span></span>
-                                     </div>
-                                     <div class="cartWidgetBTN clearfix">
-                                         <a class="cart" href="cart">View Cart</a>
-                                         <a class="checkout" href="checkout">Checkout</a>
+                             <!-- BEGIN: Login/Register Modal -->
+                             <div id="userLoginModal" class="login-modal">
+                                 <div class="login-modal-content">
+                                     <span class="closeModal">&times;</span>
+                                     <div class="login-modal-body">
+                                         <h2>Welcome</h2>
+                                         <p>Please login or create an account</p>
+
+                                         <!-- Login Button -->
+                                         <a href="{{ route('login') }}" class="btn btn-primary">Login</a>
+                                         <!-- Register Button -->
+                                         <a href="{{ route('register') }}" class="btn btn-secondary">Create Account</a>
                                      </div>
                                  </div>
                              </div>
+                             <!-- END: Login/Register Modal -->
+
+                             <style>
+                                 /* Modal Container */
+                                 .login-modal {
+                                     display: none;
+                                     position: fixed;
+                                     z-index: 999;
+                                     left: 0;
+                                     top: 0;
+                                     width: 100%;
+                                     height: 100%;
+                                     background-color: rgba(0, 0, 0, 0.5);
+                                     overflow: auto;
+                                     justify-content: center;
+                                     align-items: center;
+                                 }
+
+                                 /* Modal Content */
+                                 .login-modal-content {
+                                     background-color: #fff;
+                                     margin: 15% auto;
+                                     padding: 20px;
+                                     border-radius: 10px;
+                                     width: 100%;
+                                     max-width: 400px;
+                                     text-align: center;
+                                 }
+
+                                 /* Close Button */
+                                 .closeModal {
+                                     color: #aaa;
+                                     float: right;
+                                     font-size: 28px;
+                                     font-weight: bold;
+                                 }
+
+                                 .closeModal:hover,
+                                 .closeModal:focus {
+                                     color: #333;
+                                     text-decoration: none;
+                                     cursor: pointer;
+                                 }
+
+                                 /* Buttons */
+                                 .login-modal-body .btn {
+                                     display: block;
+                                     margin: 10px 0;
+                                     padding: 12px 20px;
+                                     border: none;
+                                     border-radius: 8px;
+                                     font-size: 16px;
+                                     cursor: pointer;
+                                 }
+
+                                 .btn-primary {
+                                     background-color: #007bff;
+                                     color: white;
+                                 }
+
+                                 .btn-secondary {
+                                     background-color: #6c757d;
+                                     color: white;
+                                 }
+                             </style>
+                             <script>
+                                 // Show the modal when the user clicks on the icon
+                                 document.getElementById('userLoginBtn').addEventListener('click', function() {
+                                     document.getElementById('userLoginModal').style.display = 'flex';
+                                 });
+
+                                 // Close the modal when the close button is clicked
+                                 document.querySelector('.closeModal').addEventListener('click', function() {
+                                     document.getElementById('userLoginModal').style.display = 'none';
+                                 });
+
+                                 // Close the modal if the user clicks outside the modal content
+                                 window.onclick = function(event) {
+                                     var modal = document.getElementById('userLoginModal');
+                                     if (event.target === modal) {
+                                         modal.style.display = 'none';
+                                     }
+                                 }
+                             </script>
+
+                             <div class="anCart">
+                                 <a href="{{ route('cart.index') }}">
+                                     <i class="fa-solid fa-shopping-cart"></i>
+                                     <span>{{ $cartCount }}</span> <!-- Use the dynamic cart count -->
+                                 </a>
+                             </div>
+
+
                          </div>
                          <div class="anSupport">
                              <i class="fa-solid fa-headset"></i>

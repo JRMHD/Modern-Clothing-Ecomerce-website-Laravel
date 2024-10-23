@@ -199,95 +199,57 @@
         .pi01VSItem input {
             display: none;
         }
-    </style>
 
+        .filterSection {
+            margin-bottom: 30px;
+        }
+
+        .filterSection h4 {
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .filterCategory,
+        .filterPrice {
+            margin-bottom: 20px;
+        }
+
+        .priceSlider {
+            width: 100%;
+        }
+    </style>
     <section class="shopPageSection">
         <div class="container">
-            <div class="row shopProductRow">
-                <div class="col-lg-12">
-                    <div class="tab-content productViewTabContent" id="productViewTabContent">
-                        <div class="tab-pane show active" id="grid-tab-pane" role="tabpanel" aria-labelledby="grid-tab"
-                            tabindex="0">
-                            <div class="row">
-                                @foreach ($products as $product)
-                                    <div class="col-sm-6 col-lg-4 col-xl-3">
-                                        <div class="productItem01">
-                                            <div class="pi01Thumb">
-                                                <img src="{{ asset('storage/' . $product->image) }}"
-                                                    alt="{{ $product->title }}" />
-                                                @if ($product->images && count($product->images) > 0)
-                                                    <img src="{{ asset('storage/' . $product->images[0]) }}"
-                                                        alt="{{ $product->title }}" />
-                                                @endif
-                                                <div class="pi01Actions">
-                                                    <a href="javascript:void(0);" class="pi01Cart"><i
-                                                            class="fa-solid fa-shopping-cart"></i></a>
-                                                    <a href="{{ route('shop_details', $product) }}"
-                                                        class="pi01QuickView"><i
-                                                            class="fa-solid fa-arrows-up-down-left-right"></i></a>
-                                                    <a href="javascript:void(0);" class="pi01Wishlist"><i
-                                                            class="fa-solid fa-heart"></i></a>
-                                                </div>
-                                                @if ($product->discounted_price)
-                                                    <div class="productLabels clearfix">
-                                                        <span
-                                                            class="plDis">-${{ $product->discounted_price - $product->price }}</span>
-                                                        <span class="plSale">Sale</span>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div class="pi01Details">
-                                                <div class="productRatings">
-                                                    <div class="productRatingWrap">
-                                                        <div class="star-rating"><span></span></div>
-                                                    </div>
-                                                    <div class="ratingCounts">{{ $product->reviews_count }} Reviews
-                                                    </div>
-                                                </div>
-                                                <h3><a
-                                                        href="{{ route('shop_details', $product) }}">{{ $product->title }}</a>
-                                                </h3>
-                                                <div class="pi01Price">
-                                                    <ins>${{ $product->price }}</ins>
-                                                    @if ($product->discounted_price)
-                                                        <del>${{ $product->discounted_price }}</del>
-                                                    @endif
-                                                </div>
-                                                <div class="pi01Variations">
-                                                    <div class="pi01VColor">
-                                                        <div class="pi01VCItem">
-                                                            <input type="radio" name="color_{{ $product->id }}"
-                                                                value="{{ $product->color }}"
-                                                                id="color_{{ $product->id }}" />
-                                                            <label for="color_{{ $product->id }}">
-                                                                <span class="color-dot"
-                                                                    style="background-color: {{ strtolower($product->color) }};"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="pi01VSize">
-                                                        @php
-                                                            $sizes = explode(',', $product->sizes);
-                                                        @endphp
-                                                        @foreach ($sizes as $size)
-                                                            <div class="pi01VSItem">
-                                                                <input type="radio" name="size_{{ $product->id }}"
-                                                                    value="{{ trim($size) }}"
-                                                                    id="size_{{ $product->id }}_{{ $loop->index }}" />
-                                                                <label
-                                                                    for="size_{{ $product->id }}_{{ $loop->index }}">{{ trim($size) }}</label>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+            <div class="row">
+                <!-- Filter Sidebar -->
+                <div class="col-lg-3">
+                    <div class="filterSection">
+                        <h4>Filter by Category</h4>
+                        <div class="filterCategory">
+                            <select id="categoryFilter" class="form-control">
+                                <option value="">All Categories</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category }}">{{ $category }}</option>
                                 @endforeach
-                            </div>
+                            </select>
+                        </div>
+
+                        <h4>Filter by Price</h4>
+                        <div class="filterPrice">
+                            <input type="range" id="priceFilter" class="priceSlider" min="0" max="500"
+                                step="10" value="500">
+                            <div id="priceRange">Up to $500</div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Products Listing -->
+                <div class="col-lg-9">
+                    <div class="row shopProductRow" id="productList">
+                        @include('profile.partials.product_list', ['products' => $products])
+                    </div>
+
+                    <!-- Pagination and Load More -->
                     <div class="row shopPaginationRow">
                         <div class="col-lg-12 text-center">
                             <a href="javascript:void(0);" class="ulinaBTN2 shopLoadMore">Load More</a>
@@ -296,7 +258,44 @@
                 </div>
             </div>
         </div>
+
     </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryFilter = document.getElementById('categoryFilter');
+            const priceFilter = document.getElementById('priceFilter');
+            const priceRange = document.getElementById('priceRange');
+            const productList = document.getElementById('productList');
+
+            // Update Price Display
+            priceFilter.addEventListener('input', function() {
+                priceRange.textContent = `Up to $${priceFilter.value}`;
+                filterProducts();
+            });
+
+            // Trigger filter when category changes
+            categoryFilter.addEventListener('change', function() {
+                filterProducts();
+            });
+
+            // Fetch filtered products via AJAX
+            function filterProducts() {
+                const category = categoryFilter.value;
+                const maxPrice = priceFilter.value;
+
+                fetch(`/filter-products?category=${category}&max_price=${maxPrice}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        productList.innerHTML = data.products; // Replace product list with filtered products
+                    })
+                    .catch(error => console.error('Error fetching products:', error));
+            }
+        });
+    </script>
     <!-- END: Shop Page Section -->
 
     <!-- BEGIN: Footer Section -->

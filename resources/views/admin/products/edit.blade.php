@@ -7,6 +7,6 @@
         @csrf
         @method('PUT')
         @include('admin.products._form', ['product' => $product])
-        <button type="submit" class="btn btn-primary">Update Product</button>
+        {{-- <button type="submit" class="btn btn-primary">Update Product</button> --}}
     </form>
 @endsection

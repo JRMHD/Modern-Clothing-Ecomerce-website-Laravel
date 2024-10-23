@@ -235,8 +235,8 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="{{ Request::routeIs('admin.posts*') ? 'active' : '' }}">
-                    <a href="{{ url('admin.posts') }}">
+                <li class="{{ Request::routeIs('/admin/products*') ? 'active' : '' }}">
+                    <a href="{{ url('/admin/products') }}">
                         <i class="fas fa-file-alt"></i>
                         <span>Manage Posts</span>
                     </a>

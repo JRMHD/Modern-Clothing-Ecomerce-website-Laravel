@@ -242,7 +242,7 @@
                     </a>
                 </li>
                 <li class="{{ Request::routeIs('admin.orders*') ? 'active' : '' }}">
-                    <a href="{{ url('admin.orders') }}">
+                    <a href="{{ url('admin/orders') }}">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Manage Orders</span>
                     </a>
@@ -254,11 +254,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.logout') }}">
+                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
                     </a>
                 </li>
+
+
             </ul>
         </nav>
 
@@ -275,7 +281,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="fas fa-bell"></i>
-                                <span class="badge bg-danger">3</span>
+                                <span class="badge bg-danger">Charles Green</span>
                             </a>
                         </li>
                         <li class="nav-item dropdown ms-3">

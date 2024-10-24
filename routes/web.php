@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\AddressController;
+// use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,6 +93,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('password/reset', [AdminAuthController::class, 'reset'])->name('password.update');
 });
 
+Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 // Password reset routes for admin
 Route::get('password/reset', [AdminAuthController::class, 'showLinkRequestForm'])->name('password.request');
@@ -117,3 +122,48 @@ Route::middleware('auth')->group(function () {
     Route::delete('cart/{cartItem}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
 Route::patch('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+
+// Checkout routes
+Route::get('checkout', [CheckoutController::class, 'checkoutForm'])->name('checkout.form');
+Route::post('checkout/place-order', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+
+// User Orders routes
+Route::get('orders', [CheckoutController::class, 'viewOrders'])->name('orders.index');
+
+// Admin Orders Management
+// use App\Http\Controllers\Admin\OrderController;
+
+// Admin Orders Management
+Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index'); // Admin orders
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::patch('orders/{order}/update-status', [OrderController::class, 'updateStatus'])->name('orders.updateStatus');
+    Route::delete('orders/{order}', [OrderController::class, 'destroy'])->name('orders.destroy');
+});
+
+Route::get('/checkout', [CheckoutController::class, 'checkoutForm'])->name('checkout.form');
+
+
+
+
+Route::get('/addresses/create', [AddressController::class, 'create'])->name('addresses.create');
+Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+// View all addresses
+Route::get('/addresses', [AddressController::class, 'index'])->name('addresses.index');
+
+// Edit an address
+Route::get('/addresses/{id}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
+Route::put('/addresses/{id}', [AddressController::class, 'update'])->name('addresses.update');
+
+// Delete an address
+Route::delete('/addresses/{id}', [AddressController::class, 'destroy'])->name('addresses.destroy');
+
+// Store a newly created address
+Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+
+
+Route::get('checkout/success', [CheckoutController::class, 'paymentSuccess'])->name('checkout.success');
+Route::get('checkout/cancel', [CheckoutController::class, 'paymentCancel'])->name('checkout.cancel');
+// Add the admin dashboard route
+Route::get('/admin/dashboard', [App\Http\Controllers\Admin\OrderController::class, 'dashboard'])->name('admin.dashboard');

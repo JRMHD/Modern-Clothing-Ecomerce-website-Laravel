@@ -34,10 +34,9 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->get(); // Order products by created_at
         return view('admin.products.index', compact('products'));
     }
-
     public function create()
     {
         return view('admin.products.create', ['categories' => $this->categories]);
@@ -48,7 +47,7 @@ class ProductController extends Controller
      */
     public function shop()
     {
-        $products = Product::orderBy('created_at', 'desc')->paginate(12);
+        $products = Product::orderBy('created_at', 'desc')->paginate(12); // Order products by created_at
         return view('shop', [
             'products' => $products,
             'categories' => $this->categories,

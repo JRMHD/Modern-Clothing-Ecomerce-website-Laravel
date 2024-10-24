@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>My Cart | Hackclothing - Secure Purchase of Luxury Designer T-Shirts</title>
+
     <style>
         :root {
             --primary: #ECF5F4;
@@ -288,7 +290,7 @@
         @if ($cartItems->isEmpty())
             <div class="cart-empty">
                 <p>Your cart is empty</p>
-                <a href="{{ route('shop.index') }}" class="shop-btn">Continue Shopping</a>
+                <a href="{{ route('shop') }}" class="shop-btn">Continue Shopping</a>
             </div>
         @else
             <!-- Desktop View -->
@@ -384,9 +386,10 @@
                 </div>
                 <div class="cart-actions">
                     <a href="{{ route('shop') }}" class="shop-btn">Continue Shopping</a>
-                    <a href="#" class="checkout-btn">Proceed to Checkout</a>
+                    <a href="{{ route('checkout.form') }}" class="checkout-btn">Proceed to Checkout</a>
                 </div>
             </div>
+
         @endif
     </main>
 

@@ -83,7 +83,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="secTitle">Stay Connected</h2>
-                    <p class="secDesc">e’d love to hear from you! Reach out with any questions or inquiries about our
+                    <p class="secDesc">We’d love to hear from you! Reach out with any questions or inquiries about our
                         latest arrivals</p>
                 </div>
             </div>
@@ -108,32 +108,154 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 offset-xl-2">
-                    <form action="#" method="post" class="contactForm" id="contact_form">
+                    <form action="{{ route('contact.submit') }}" method="POST" class="contactForm" id="contact_form">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="required" type="text" name="conName" placeholder="Your name">
+                                <input class="required" type="text" name="conName" placeholder="Your name" required>
                             </div>
                             <div class="col-md-6">
-                                <input class="required" type="email" name="conEmail" placeholder="Your email">
+                                <input class="required" type="email" name="conEmail" placeholder="Your email"
+                                    required>
                             </div>
                             <div class="col-md-6">
-                                <input class="required" type="text" name="conPhone" placeholder="Your phone">
+                                <input class="required" type="text" name="conPhone" placeholder="Your phone"
+                                    required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="conWeb" placeholder="Website">
+                                <input type="text" name="conSubject" placeholder="Subject" required>
                             </div>
                             <div class="col-md-12">
-                                <textarea class="required" name="message" placeholder="Write your message here"></textarea>
+                                <textarea class="required" name="message" placeholder="Write your message here" required></textarea>
                             </div>
                             <div class="col-md-12">
-                                <button type="submit" class="ulinaBTN">
+                                <button type="submit" class="ulinaBTN" id="submit_button">
                                     <span>Submit Now</span>
                                 </button>
-                                <div class="alert con_message"></div>
                             </div>
+                        </div>
+
+                        <!-- Modern Loading Spinner -->
+                        <div id="loading_spinner" style="display:none; text-align: center; margin-top: 20px;">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                                style="width: 40px; height: 40px;">
+                                <style>
+                                    .spinner-ring {
+                                        transform-origin: center;
+                                        animation: spin 1.2s linear infinite;
+                                    }
+
+                                    .spinner-ring circle {
+                                        fill: none;
+                                        stroke: #ECF5F4;
+                                        stroke-width: 8;
+                                        stroke-linecap: round;
+                                        stroke-dasharray: 45, 200;
+                                        stroke-dashoffset: 0;
+                                        animation: pulse 1.2s ease-in-out infinite;
+                                    }
+
+                                    @keyframes spin {
+                                        100% {
+                                            transform: rotate(360deg);
+                                        }
+                                    }
+
+                                    @keyframes pulse {
+                                        0% {
+                                            stroke-dasharray: 45, 200;
+                                            stroke-dashoffset: 0;
+                                        }
+
+                                        50% {
+                                            stroke-dasharray: 160, 200;
+                                            stroke-dashoffset: -35;
+                                        }
+
+                                        100% {
+                                            stroke-dasharray: 45, 200;
+                                            stroke-dashoffset: -200;
+                                        }
+                                    }
+                                </style>
+                                <g class="spinner-ring">
+                                    <circle cx="50" cy="50" r="35" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <!-- Success Message Area -->
+                        <div id="success_message"
+                            style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px; background-color: #dcf7dc; color: #0a5d0a; text-align: center;">
+                            <!-- Success message will be shown here -->
                         </div>
                     </form>
                 </div>
+
+                <style>
+                    #loading_spinner {
+                        margin: 20px auto;
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    #success_message {
+                        animation: fadeIn 0.3s ease-in-out;
+                    }
+
+                    @keyframes fadeIn {
+                        from {
+                            opacity: 0;
+                            transform: translateY(-10px);
+                        }
+
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                </style>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        $('#contact_form').on('submit', function(e) {
+                            e.preventDefault();
+
+                            // Show spinner and disable submit button
+                            $('#loading_spinner').show();
+                            $('#submit_button').prop('disabled', true);
+
+                            $.ajax({
+                                url: "{{ route('contact.submit') }}",
+                                method: "POST",
+                                data: $(this).serialize(),
+                                success: function(response) {
+                                    $('#loading_spinner').hide();
+                                    $('#submit_button').prop('disabled', false);
+
+                                    if (response.success) {
+                                        $('#success_message').text(response.success).show();
+                                        $('#contact_form')[0].reset();
+
+                                        // Hide success message after 5 seconds
+                                        setTimeout(() => {
+                                            $('#success_message').fadeOut();
+                                        }, 5000);
+                                    }
+                                },
+                                error: function(xhr) {
+                                    $('#loading_spinner').hide();
+                                    $('#submit_button').prop('disabled', false);
+
+                                    const errorMsg = xhr.responseJSON?.message ||
+                                        "An error occurred. Please try again.";
+                                    alert(errorMsg);
+                                }
+                            });
+                        });
+                    });
+                </script>
             </div>
         </div>
     </section>

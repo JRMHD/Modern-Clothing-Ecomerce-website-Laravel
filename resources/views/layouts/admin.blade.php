@@ -263,8 +263,6 @@
                         <span>Logout</span>
                     </a>
                 </li>
-
-
             </ul>
         </nav>
 

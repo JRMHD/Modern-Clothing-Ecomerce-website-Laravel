@@ -1,36 +1,3 @@
- <!-- BEGIN: Instagram Section -->
- <section class="instagramSection">
-     <div class="container">
-         <div class="row">
-             <div class="col-lg-12 text-center">
-                 <h2 class="secTitle">Follow Us in Instagram @Hackclothing</h2>
-             </div>
-         </div>
-         <div class="row">
-             <div class="col-lg-12">
-                 <div class="instagramSlider owl-carousel">
-                     <a href="images/instagram/1_f.jpg" class="instagramPhoto imgPopup">
-                         <img src="images/instagram/1.jpg" alt="Ulina Instagram" />
-                     </a>
-                     <a href="images/instagram/2_f.jpg" class="instagramPhoto imgPopup">
-                         <img src="images/instagram/2.jpg" alt="Ulina Instagram" />
-                     </a>
-                     <a href="images/instagram/3_f.jpg" class="instagramPhoto imgPopup">
-                         <img src="images/instagram/3.jpg" alt="Ulina Instagram" />
-                     </a>
-                     <a href="images/instagram/4_f.jpg" class="instagramPhoto imgPopup">
-                         <img src="images/instagram/4.jpg" alt="Ulina Instagram" />
-                     </a>
-                     <a href="images/instagram/5_f.jpg" class="instagramPhoto imgPopup">
-                         <img src="images/instagram/5.jpg" alt="Ulina Instagram" />
-                     </a>
-                 </div>
-             </div>
-         </div>
-     </div>
- </section>
- <!-- END: Instagram Section -->
-
  <!-- BEGIN: Footer Section -->
  <footer class="footer">
      <div class="container">
@@ -45,13 +12,62 @@
 
                      </div>
                      <div class="subscribForm">
-                         <form method="post" action="#">
+                         <form id="subscribe_form" method="post" action="{{ route('subscribe') }}">
+                             @csrf
                              <input type="email" name="subsEmail" placeholder="Your email here" required />
                              <button type="submit">
                                  <i class="fa-solid fa-envelope"></i>
                              </button>
                          </form>
+                         <!-- Loading spinner and success message placeholders -->
+                         <div id="loading_spinner" style="display: none; margin-top: 10px;">
+                             <!-- SVG Spinner for a modern look -->
+                             <svg width="24" height="24" viewBox="0 0 100 100" class="loading-spinner">
+                                 <circle cx="50" cy="50" r="40" stroke="gray" stroke-width="8"
+                                     fill="none" />
+                                 <circle cx="50" cy="50" r="40" stroke="#007bff" stroke-width="8"
+                                     fill="none" stroke-linecap="round" stroke-dasharray="250"
+                                     stroke-dashoffset="250">
+                                     <animate attributeName="stroke-dashoffset" from="250" to="0"
+                                         dur="1s" repeatCount="indefinite" />
+                                 </circle>
+                             </svg>
+                         </div>
+                         <div id="subscribe_message" style="display: none; margin-top: 10px; color: #28a745;"></div>
                      </div>
+
+                     <!-- AJAX and loading spinner script -->
+                     <script>
+                         $(document).ready(function() {
+                             $('#subscribe_form').on('submit', function(e) {
+                                 e.preventDefault(); // Prevent default form submission
+
+                                 // Show the loading spinner and hide any previous message
+                                 $('#loading_spinner').show();
+                                 $('#subscribe_message').hide();
+
+                                 $.ajax({
+                                     url: "{{ route('subscribe') }}", // Your route for handling subscription
+                                     method: "POST",
+                                     data: $(this).serialize(),
+                                     success: function(response) {
+                                         $('#loading_spinner').hide(); // Hide spinner
+                                         $('#subscribe_form')[0].reset(); // Reset form fields
+                                         $('#subscribe_message').text(response.success)
+                                     .show(); // Show success message
+                                     },
+                                     error: function(xhr) {
+                                         $('#loading_spinner').hide(); // Hide spinner
+                                         $('#subscribe_message').text("An error occurred. Please try again.")
+                                             .show();
+                                     }
+                                 });
+                             });
+                         });
+                     </script>
+
+
+
                  </aside>
              </div>
              <div class="col-lg-3 col-md-6">

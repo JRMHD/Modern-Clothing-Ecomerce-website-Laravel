@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\AddressController;
-// use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\SubscriptionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -167,3 +169,7 @@ Route::get('checkout/success', [CheckoutController::class, 'paymentSuccess'])->n
 Route::get('checkout/cancel', [CheckoutController::class, 'paymentCancel'])->name('checkout.cancel');
 // Add the admin dashboard route
 Route::get('/admin/dashboard', [App\Http\Controllers\Admin\OrderController::class, 'dashboard'])->name('admin.dashboard');
+
+Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');

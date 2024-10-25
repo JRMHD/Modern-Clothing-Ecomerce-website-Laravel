@@ -62,218 +62,209 @@
 
 <body>
     <!-- BEGIN: PreLoder Section -->
-    <section class="preloader" id="preloader">
+    {{-- <section class="preloader" id="preloader">
         <div class="spinner-eff spinner-eff-1">
             <div class="bar bar-top"></div>
             <div class="bar bar-right"></div>
             <div class="bar bar-bottom"></div>
             <div class="bar bar-left"></div>
         </div>
-    </section>
+    </section> --}}
     <!-- END: PreLoder Section -->
 
     <!-- BEGIN: Header 01 Section -->
     @include('header')
     <!-- END: Header 01 Section -->
 
-   
+
     <!-- BEGIN: Slider Section -->
-    <section class="sliderSection01">
-        <div class="rev_slider_wrapper">
-            <div id="rev_slider_1" class="rev_slider fullwidthabanner" style="display: none" data-version="5.4.1">
-                <ul>
-                    <li data-index="rs-3046" data-transition="random-premium" data-slotamount="default"
-                        data-hideafterloop="0" data-hideslideonmobile="off" data-easein="Power3.easeInOut"
-                        data-easeout="Power3.easeInOut" data-masterspeed="1000" data-thumb="" data-rotate="0"
-                        data-saveperformance="off" data-title="" data-param1="01" data-param2="" data-param3=""
-                        data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9=""
-                        data-param10="" data-description="">
-                        <img src="images/slider/1.png" alt="Ulina Slider" class="rev-slidebg" />
-                        <div class="tp-caption tp-resizeme layer01 shapeImage"
-                            data-frames='[{"delay":1200,"speed":500,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"power3.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-x="['right','right','right','right']" data-hoffset="['192','-100','0','0']"
-                            data-y="['bottom','bottom','bottom','bottom']" data-voffset="['71','71','-300','0']"
-                            data-width="['auto','auto','60%','auto']" data-height="auto"
-                            data-visibility="['on','on','on','off']" data-basealign="slide">
-                            <img src="images/slider/s1.png" alt="Slider Shape" />
+    <section style="background-color: #ECF5F4; padding: 80px 20px; font-family: 'Arial', sans-serif;">
+        <div style="max-width: 1600px; margin: 0 auto;">
+            <h2 style="text-align: center; color: #333; margin-bottom: 60px; font-size: 3rem;"></h2>
+
+            <div class="slider" style="position: relative; overflow: hidden; max-width: 1200px; margin: 0 auto;">
+                <div class="slider-container" style="display: flex; transition: transform 0.5s ease-in-out;">
+                    <div class="slide" style="min-width: 100%; flex: 0 0 100%; padding: 20px; box-sizing: border-box;">
+                        <div
+                            style="background: white; border-radius: 25px; padding: 50px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 1000px; margin: 0 auto;">
+                            <div style="max-width: 450px; margin: 0 auto;">
+                                <img src="\images\slider\person_1.png" alt="Premier Designer"
+                                    style="width: 450px; height: 450px; border-radius: 50%; margin-bottom: 40px; object-fit: cover; box-shadow: 0 8px 16px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            </div>
+                            <h3 style="color: #333; margin-bottom: 20px; font-size: 2.5rem;">Premier Designer</h3>
+                            <p style="color: #666; margin-bottom: 25px; font-size: 1.4rem;">Shop High-End T-shirts</p>
                         </div>
-                        <div class="tp-caption tp-resizeme rs-parallaxlevel-2 layer03 personImage"
-                            data-frames='[{"delay":1300,"speed":600,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"power3.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-x="['right','right','right','right']" data-hoffset="['300','0','0','0']"
-                            data-y="['bottom','bottom','bottom','bottom']" data-voffset="['0','0','-300','0']"
-                            data-width="['auto','auto','60%','80%']" data-height="auto"
-                            data-visibility="['on','on','on','off']" data-textAlign="['left','left','left','right']"
-                            data-basealign="slide">
-                            <img src="images/slider/person_1.png" alt="Slider Shape" />
+                    </div>
+
+                    <div class="slide" style="min-width: 100%; flex: 0 0 100%; padding: 20px; box-sizing: border-box;">
+                        <div
+                            style="background: white; border-radius: 25px; padding: 50px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 1000px; margin: 0 auto;">
+                            <div style="max-width: 450px; margin: 0 auto;">
+                                <img src="\images\slider\person_2.png" alt="Exclusive Designer"
+                                    style="width: 450px; height: 450px; border-radius: 50%; margin-bottom: 40px; object-fit: cover; box-shadow: 0 8px 16px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            </div>
+                            <h3 style="color: #333; margin-bottom: 20px; font-size: 2.5rem;">Exclusive Designer</h3>
+                            <p style="color: #666; margin-bottom: 25px; font-size: 1.4rem;">Discover Latest Designer
+                                Tees</p>
                         </div>
-                        <div class="tp-caption jost theSubTitle" data-x="['left','left','left','center']"
-                            data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['-38','-38','-38','-58']" data-fontsize="['21','21','21','21']"
-                            data-fontweight="['500','500','500','500']" data-lineheight="['21','21','21','21']"
-                            data-width="['auto','auto','auto','100%']" data-height="none" data-whitespace="nowrap"
-                            data-color="['#7b9496','#7b9496','#7b9496','#7b9496']" data-type="text"
-                            data-responsive_offset="off"
-                            data-frames='[{"delay":1100,"speed":400,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['left','left','left','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','10','10','0']">
-                            Premier Designer
+                    </div>
+
+                    <div class="slide" style="min-width: 100%; flex: 0 0 100%; padding: 20px; box-sizing: border-box;">
+                        <div
+                            style="background: white; border-radius: 25px; padding: 50px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); max-width: 1000px; margin: 0 auto;">
+                            <div style="max-width: 450px; margin: 0 auto;">
+                                <img src="\images\slider\person_3.png" alt="Premium Designer"
+                                    style="width: 450px; height: 450px; border-radius: 50%; margin-bottom: 40px; object-fit: cover; box-shadow: 0 8px 16px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
+                            </div>
+                            <h3 style="color: #333; margin-bottom: 20px; font-size: 2.5rem;">Premium Designer</h3>
+                            <p style="color: #666; margin-bottom: 25px; font-size: 1.4rem;">The Best Designer Tees in
+                                the USA</p>
                         </div>
-                        <div class="tp-caption jost textLayer theTitles" data-x="['left','left','left','center']"
-                            data-hoffset="['-5','-5','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['68','68','68','28']" data-fontsize="['72','72','52','52']"
-                            data-fontweight="['400','400','400','400']" data-lineheight="['84','84','64','64']"
-                            data-width="['550','550','450','100%']" data-height="none" data-whitespace="normal"
-                            data-color="['#52586d','#52586d','#52586d','#52586d']" data-type="text"
-                            data-responsive_offset="off"
-                            data-frames='[{"delay":1200,"speed":500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['left','left','left','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','0','0','0']">
-                            Shop High-End T-shirts
-                        </div>
-                        <div class="tp-caption ws_nowrap textLayer theBTNS" data-x="['left','left','left','center']"
-                            data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['231','231','211','171']" data-fontsize="['16','16','16','16']"
-                            data-fontweight="500" data-lineheight="['55','55','55','55']"
-                            data-width="['auto','auto','auto','100%']" data-height="auto" data-whitesapce="normal"
-                            data-color="#FFFFFF" data-type="text" data-responsive_offset="off"
-                            data-frames='[{"delay":1300,"speed":600,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['center','center','center','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','0','0','0']">
-                            <a class="ulinaBTN ulinaSliderBTN" href="shop"><span>Shop Now</span></a>
-                        </div>
-                    </li>
-                    <li data-index="rs-3047" data-transition="random-premium" data-slotamount="default"
-                        data-hideafterloop="0" data-hideslideonmobile="off" data-easein="Power3.easeInOut"
-                        data-easeout="Power3.easeInOut" data-masterspeed="1000" data-thumb="" data-rotate="0"
-                        data-saveperformance="off" data-title="" data-param1="01" data-param2="" data-param3=""
-                        data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9=""
-                        data-param10="" data-description="">
-                        <img src="images/slider/1.png" alt="Ulina Slider" class="rev-slidebg" />
-                        <div class="tp-caption tp-resizeme layer01 shapeImage"
-                            data-frames='[{"delay":1200,"speed":500,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"power3.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-x="['right','right','right','right']" data-hoffset="['192','-100','0','0']"
-                            data-y="['bottom','bottom','bottom','bottom']" data-voffset="['71','71','-300','0']"
-                            data-width="['auto','auto','60%','auto']" data-height="auto"
-                            data-visibility="['on','on','on','off']" data-basealign="slide">
-                            <img src="images/slider/s1.png" alt="Slider Shape" />
-                        </div>
-                        <div class="tp-caption tp-resizeme rs-parallaxlevel-2 layer03 personImage"
-                            data-frames='[{"delay":1300,"speed":600,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"power3.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-x="['right','right','right','right']" data-hoffset="['300','0','0','0']"
-                            data-y="['bottom','bottom','bottom','bottom']" data-voffset="['0','0','-300','0']"
-                            data-width="['auto','auto','60%','80%']" data-height="auto"
-                            data-visibility="['on','on','on','off']" data-textAlign="['left','left','left','right']"
-                            data-basealign="slide">
-                            <img src="images/slider/person_2.png" alt="Slider Shape" />
-                        </div>
-                        <div class="tp-caption jost theSubTitle" data-x="['left','left','left','center']"
-                            data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['-38','-38','-38','-58']" data-fontsize="['21','21','21','21']"
-                            data-fontweight="['500','500','500','500']" data-lineheight="['21','21','21','21']"
-                            data-width="['auto','auto','auto','100%']" data-height="none" data-whitespace="nowrap"
-                            data-color="['#7b9496','#7b9496','#7b9496','#7b9496']" data-type="text"
-                            data-responsive_offset="off"
-                            data-frames='[{"delay":1100,"speed":400,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['left','left','left','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','10','10','0']">
-                            Exclusive Designer
-                        </div>
-                        <div class="tp-caption jost textLayer theTitles" data-x="['left','left','left','center']"
-                            data-hoffset="['-5','-5','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['68','68','68','28']" data-fontsize="['72','72','52','52']"
-                            data-fontweight="['400','400','400','400']" data-lineheight="['84','84','64','64']"
-                            data-width="['550','550','450','100%']" data-height="none" data-whitespace="normal"
-                            data-color="['#52586d','#52586d','#52586d','#52586d']" data-type="text"
-                            data-responsive_offset="off"
-                            data-frames='[{"delay":1200,"speed":500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['left','left','left','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','0','0','0']">
-                            Discover Latest Designer Tees
-                        </div>
-                        <div class="tp-caption ws_nowrap textLayer theBTNS" data-x="['left','left','left','center']"
-                            data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['231','231','211','171']" data-fontsize="['16','16','16','16']"
-                            data-fontweight="500" data-lineheight="['55','55','55','55']"
-                            data-width="['auto','auto','auto','100%']" data-height="auto" data-whitesapce="normal"
-                            data-color="#FFFFFF" data-type="text" data-responsive_offset="off"
-                            data-frames='[{"delay":1300,"speed":600,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['center','center','center','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','0','0','0']">
-                            <a class="ulinaBTN ulinaSliderBTN" href="shop"><span>Explore Now</span></a>
-                        </div>
-                    </li>
-                    <li data-index="rs-3048" data-transition="random-premium" data-slotamount="default"
-                        data-hideafterloop="0" data-hideslideonmobile="off" data-easein="Power3.easeInOut"
-                        data-easeout="Power3.easeInOut" data-masterspeed="1000" data-thumb="" data-rotate="0"
-                        data-saveperformance="off" data-title="" data-param1="01" data-param2="" data-param3=""
-                        data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9=""
-                        data-param10="" data-description="">
-                        <img src="images/slider/1.png" alt="Ulina Slider" class="rev-slidebg" />
-                        <div class="tp-caption tp-resizeme layer01 shapeImage"
-                            data-frames='[{"delay":1200,"speed":500,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"power3.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-x="['right','right','right','right']" data-hoffset="['192','-100','0','0']"
-                            data-y="['bottom','bottom','bottom','bottom']" data-voffset="['71','71','-300','0']"
-                            data-width="['auto','auto','60%','auto']" data-height="auto"
-                            data-visibility="['on','on','on','off']" data-basealign="slide">
-                            <img src="images/slider/s1.png" alt="Slider Shape" />
-                        </div>
-                        <div class="tp-caption tp-resizeme rs-parallaxlevel-2 layer03 personImage"
-                            data-frames='[{"delay":1300,"speed":600,"frame":"0","from":"opacity:0;","to":"o:1;","ease":"power3.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-x="['right','right','right','right']" data-hoffset="['300','0','0','0']"
-                            data-y="['bottom','bottom','bottom','bottom']" data-voffset="['0','0','-300','0']"
-                            data-width="['auto','auto','60%','80%']" data-height="auto"
-                            data-visibility="['on','on','on','off']" data-textAlign="['left','left','left','right']"
-                            data-basealign="slide">
-                            <img src="images/slider/person_3.png" alt="Slider Shape" />
-                        </div>
-                        <div class="tp-caption jost theSubTitle" data-x="['left','left','left','center']"
-                            data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['-38','-38','-38','-58']" data-fontsize="['21','21','21','21']"
-                            data-fontweight="['500','500','500','500']" data-lineheight="['21','21','21','21']"
-                            data-width="['auto','auto','auto','100%']" data-height="none" data-whitespace="nowrap"
-                            data-color="['#7b9496','#7b9496','#7b9496','#7b9496']" data-type="text"
-                            data-responsive_offset="off"
-                            data-frames='[{"delay":1100,"speed":400,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['left','left','left','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','10','10','0']">
-                            Premium Designer
-                        </div>
-                        <div class="tp-caption jost textLayer theTitles" data-x="['left','left','left','center']"
-                            data-hoffset="['-5','-5','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['68','68','68','28']" data-fontsize="['72','72','52','52']"
-                            data-fontweight="['400','400','400','400']" data-lineheight="['84','84','64','64']"
-                            data-width="['550','550','450','100%']" data-height="none" data-whitespace="normal"
-                            data-color="['#52586d','#52586d','#52586d','#52586d']" data-type="text"
-                            data-responsive_offset="off"
-                            data-frames='[{"delay":1200,"speed":500,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['left','left','left','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','0','0','0']">
-                            The Best Designer Tees in the USA
-                        </div>
-                        <div class="tp-caption ws_nowrap textLayer theBTNS" data-x="['left','left','left','center']"
-                            data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
-                            data-voffset="['231','231','211','171']" data-fontsize="['16','16','16','16']"
-                            data-fontweight="500" data-lineheight="['55','55','55','55']"
-                            data-width="['auto','auto','auto','100%']" data-height="auto" data-whitesapce="normal"
-                            data-color="#FFFFFF" data-type="text" data-responsive_offset="off"
-                            data-frames='[{"delay":1300,"speed":600,"frame":"0","from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","to":"o:1;","ease":"power4.inOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"power3.inOut"}]'
-                            data-textAlign="['center','center','center','center']" data-paddingtop="['0','0','0','0']"
-                            data-paddingright="['0','0','0','0']" data-paddingbottom="['0','0','0','0']"
-                            data-paddingleft="['0','0','0','0']" data-marginleft="['0','0','0','0']">
-                            <a class="ulinaBTN ulinaSliderBTN" href="shop"><span>Shop Now</span></a>
-                        </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+
+                <button onclick="prevSlide()"
+                    style="position: absolute; left: 30px; top: 50%; transform: translateY(-50%); background: white; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-size: 28px; z-index: 2; transition: transform 0.3s ease;"
+                    onmouseover="this.style.transform='translateY(-50%) scale(1.1)'"
+                    onmouseout="this.style.transform='translateY(-50%) scale(1)'">←</button>
+                <button onclick="nextSlide()"
+                    style="position: absolute; right: 30px; top: 50%; transform: translateY(-50%); background: white; border: none; border-radius: 50%; width: 60px; height: 60px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-size: 28px; z-index: 2; transition: transform 0.3s ease;"
+                    onmouseover="this.style.transform='translateY(-50%) scale(1.1)'"
+                    onmouseout="this.style.transform='translateY(-50%) scale(1)'">→</button>
+
+                <div class="dots" style="display: flex; justify-content: center; gap: 15px; margin-top: 40px;">
+                    <span onclick="goToSlide(0)" class="dot"
+                        style="width: 15px; height: 15px; background: #333; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;"></span>
+                    <span onclick="goToSlide(1)" class="dot"
+                        style="width: 15px; height: 15px; background: #ccc; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;"></span>
+                    <span onclick="goToSlide(2)" class="dot"
+                        style="width: 15px; height: 15px; background: #ccc; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;"></span>
+                </div>
             </div>
         </div>
+
+        <style>
+            @media (max-width: 1200px) {
+                .slide div {
+                    padding: 40px !important;
+                }
+
+                .slide img {
+                    width: 350px !important;
+                    height: 350px !important;
+                }
+
+                .slide h3 {
+                    font-size: 2rem !important;
+                }
+
+                .slide p {
+                    font-size: 1.2rem !important;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .slide div {
+                    padding: 30px !important;
+                }
+
+                .slide img {
+                    width: 280px !important;
+                    height: 280px !important;
+                }
+
+                .slide h3 {
+                    font-size: 1.8rem !important;
+                }
+
+                .slide p {
+                    font-size: 1.1rem !important;
+                }
+
+                button {
+                    width: 45px !important;
+                    height: 45px !important;
+                    font-size: 20px !important;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .slide div {
+                    padding: 20px !important;
+                }
+
+                .slide img {
+                    width: 220px !important;
+                    height: 220px !important;
+                }
+
+                .slide h3 {
+                    font-size: 1.5rem !important;
+                }
+
+                .slide p {
+                    font-size: 1rem !important;
+                }
+            }
+        </style>
+
+        <script>
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.dot');
+            const container = document.querySelector('.slider-container');
+
+            function updateSlider() {
+                container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                dots.forEach((dot, index) => {
+                    dot.style.background = index === currentSlide ? '#333' : '#ccc';
+                });
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlider();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlider();
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlider();
+            }
+
+            // Auto slide every 5 seconds
+            setInterval(nextSlide, 5000);
+
+            // Add touch support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+        </script>
     </section>
     <!-- END: Slider Section -->
 

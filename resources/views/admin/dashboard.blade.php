@@ -194,7 +194,10 @@
             <div class="header-card">
                 <div class="header-content">
                     <h2 style="margin: 0 0 10px 0; font-size: 24px; font-weight: 600;">{{ __('Admin Dashboard') }}</h2>
-                    <p style="margin: 0; opacity: 0.9;">Welcome, {{ Auth::guard('admin')->user()->name }}</p>
+                    <p style="margin: 0; opacity: 0.9;">
+                        Welcome, {{ Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : 'Guest' }}
+                    </p>
+
                 </div>
             </div>
 

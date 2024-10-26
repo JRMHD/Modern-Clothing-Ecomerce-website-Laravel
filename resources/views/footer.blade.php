@@ -9,7 +9,6 @@
                      </div>
                      <div class="aboutWidContent">
                          We are dedicated to providing high-quality clothing and exceptional customer service.
-
                      </div>
                      <div class="subscribForm">
                          <form id="subscribe_form" method="post" action="{{ route('subscribe') }}">
@@ -19,55 +18,75 @@
                                  <i class="fa-solid fa-envelope"></i>
                              </button>
                          </form>
-                         <!-- Loading spinner and success message placeholders -->
-                         <div id="loading_spinner" style="display: none; margin-top: 10px;">
-                             <!-- SVG Spinner for a modern look -->
-                             <svg width="24" height="24" viewBox="0 0 100 100" class="loading-spinner">
-                                 <circle cx="50" cy="50" r="40" stroke="gray" stroke-width="8"
-                                     fill="none" />
-                                 <circle cx="50" cy="50" r="40" stroke="#007bff" stroke-width="8"
-                                     fill="none" stroke-linecap="round" stroke-dasharray="250"
-                                     stroke-dashoffset="250">
-                                     <animate attributeName="stroke-dashoffset" from="250" to="0"
-                                         dur="1s" repeatCount="indefinite" />
-                                 </circle>
-                             </svg>
-                         </div>
-                         <div id="subscribe_message" style="display: none; margin-top: 10px; color: #28a745;"></div>
+                         <div id="loading" class="loading" style="display: none;"></div>
+                         <div id="message" style="display: none;"></div>
                      </div>
 
-                     <!-- AJAX and loading spinner script -->
+
+                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                      <script>
                          $(document).ready(function() {
-                             $('#subscribe_form').on('submit', function(e) {
-                                 e.preventDefault(); // Prevent default form submission
+                             $('#subscribe_form').on('submit', function(event) {
+                                 event.preventDefault(); // Prevent the default form submission
 
-                                 // Show the loading spinner and hide any previous message
-                                 $('#loading_spinner').show();
-                                 $('#subscribe_message').hide();
+                                 // Show loading indicator
+                                 $('#loading').show();
+                                 $('#message').hide();
 
                                  $.ajax({
-                                     url: "{{ route('subscribe') }}", // Your route for handling subscription
-                                     method: "POST",
+                                     url: $(this).attr('action'),
+                                     type: 'POST',
                                      data: $(this).serialize(),
                                      success: function(response) {
-                                         $('#loading_spinner').hide(); // Hide spinner
+                                         // Hide loading and show success message
+                                         $('#loading').hide();
+                                         $('#message').text(response.success).css('color', 'green').show();
                                          $('#subscribe_form')[0].reset(); // Reset form fields
-                                         $('#subscribe_message').text(response.success)
-                                     .show(); // Show success message
                                      },
                                      error: function(xhr) {
-                                         $('#loading_spinner').hide(); // Hide spinner
-                                         $('#subscribe_message').text("An error occurred. Please try again.")
-                                             .show();
+                                         // Hide loading and show error message
+                                         $('#loading').hide();
+                                         let errorMessage = 'An error occurred. Please try again.';
+                                         if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                             errorMessage = xhr.responseJSON.errors.subsEmail[0];
+                                         }
+                                         $('#message').text(errorMessage).css('color', 'red').show();
                                      }
                                  });
                              });
                          });
                      </script>
+                     <style>
+                         .loading {
+                             border: 8px solid #f3f3f3;
+                             /* Light gray */
+                             border-top: 8px solid #3498db;
+                             /* Blue */
+                             border-radius: 50%;
+                             width: 40px;
+                             /* Size of the spinner */
+                             height: 40px;
+                             /* Size of the spinner */
+                             animation: spin 1s linear infinite;
+                             margin: 10px auto;
+                             /* Center the spinner */
+                         }
 
+                         @keyframes spin {
+                             0% {
+                                 transform: rotate(0deg);
+                             }
 
+                             100% {
+                                 transform: rotate(360deg);
+                             }
+                         }
 
+                         #message {
+                             margin-top: 10px;
+                             font-size: 16px;
+                         }
+                     </style>
                  </aside>
              </div>
              <div class="col-lg-3 col-md-6">

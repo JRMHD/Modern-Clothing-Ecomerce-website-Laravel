@@ -172,4 +172,3 @@ Route::get('/admin/dashboard', [App\Http\Controllers\Admin\OrderController::clas
 
 Route::post('/contact-submit', [ContactController::class, 'submit'])->name('contact.submit');
 Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
-Route::post('/subscribe', [SubscriptionController::class, 'subscribe'])->name('subscribe');
